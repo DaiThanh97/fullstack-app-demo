@@ -1,0 +1,17 @@
+# Versioning and metadata
+.git
+.gitignore
+.dockerignore
+
+# Build dependencies
+node_modules
+
+# Environment (contains sensitive data)
+.env.example
+
+# Files not required for production
+.editorconfig
+README.md
+Dockerfile
+.prettierrc
+.eslintrc.js

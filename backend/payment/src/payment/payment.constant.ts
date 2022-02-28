@@ -1,0 +1,3 @@
+export const PAYMENT_SERVICE = 'PAYMENT_SERVICE';
+export const PAYMENT_QUEUE = 'PAYMENT_QUEUE';
+export const PAYMENT_JOB = 'PAYMENT_JOB';

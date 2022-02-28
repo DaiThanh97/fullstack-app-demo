@@ -1,0 +1,4 @@
+type Mutation {
+  createOrder(input: OrderCreateInput!): OrderDetail
+  cancelOrder(input: OrderCancelInput!): OrderDetail
+}

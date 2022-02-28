@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment
+  template:
+    metadata:
+      labels:
+        app: payment
+    spec:
+      containers:
+        - name: payment
+          image: setel/payment
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          env:
+            - name: INTERNAL_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: internal-key
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: payment-mysql-user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: payment-mysql-password
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: node-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-port
+            - name: OPEN_PLAYGROUND
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: open-playground
+            - name: SERVICE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-service-name
+            - name: LOG_SERVICE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-service-name
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: log-level
+            - name: LOG_INLINE
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: log-inline
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-mysql-host
+            - name: MYSQL_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-mysql-port
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: payment-mysql-db
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-redis-host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-redis-port
+            - name: NATS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: nats-host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-svc
+spec:
+  selector:
+    app: payment
+  ports:
+    - name: payment
+      protocol: TCP
+      port: 5002
+      targetPort: 5002

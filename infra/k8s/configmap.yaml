@@ -1,0 +1,28 @@
+# Apply before start the deployment
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: all-config-map
+data:
+  node-env: 'development'
+  introspection: 'true'
+  gateway-port: '4000'
+  orders-port: '5001'
+  payment-port: '5002'
+  open-playground: 'true'
+  gateway-service-name: 'gateway'
+  order-service-name: 'order-service'
+  payment-service-name: 'payment-service'
+  log-level: 'info'
+  log-inline: 'true'
+  order-mongo-host: 'mongodb-0.mongodb-headless.default.svc.cluster.local:27017'
+  order-mongo-db: 'orders'
+  order-redis-host: 'redis-master.default.svc.cluster.local'
+  order-redis-port: '6379'
+  payment-mysql-host: 'mysql-mariadb.default.svc.cluster.local'
+  payment-mysql-port: '3306'
+  payment-mysql-db: 'payment'
+  payment-redis-host: 'redis-master.default.svc.cluster.local'
+  payment-redis-port: '6379'
+  nats-host: 'nats://nats.default.svc.cluster.local:4222'
+  order-service-url: 'http://orders-svc:5001/graphql'

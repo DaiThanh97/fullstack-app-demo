@@ -1,0 +1,15 @@
+type OrderDetail {
+  _id: ID!
+  paymentId: String!
+  amount: Int!
+  tax: Float!
+  total: Int!
+  status: OrderStatus!
+  createdAt: String
+  updatedAt: String
+  createdBy: String!
+}
+
+type OrderStatusCheck {
+  status: OrderStatus!
+}

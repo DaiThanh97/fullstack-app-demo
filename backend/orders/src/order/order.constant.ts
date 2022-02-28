@@ -1,0 +1,3 @@
+export const ORDER_SERVICE = 'ORDER_SERVICE';
+export const DELIVERY_QUEUE = 'DELIVERY_QUEUE';
+export const DELIVERY_JOB = 'DELIVERY_JOB';

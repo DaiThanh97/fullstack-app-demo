@@ -1,0 +1,5 @@
+type Query {
+  order(input: OrderByIdInput!): OrderDetail
+  orders: [OrderDetail]
+  checkOrderStatus(input: CheckOrderStatusInput!): OrderStatusCheck
+}

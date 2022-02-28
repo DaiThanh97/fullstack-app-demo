@@ -1,0 +1,17 @@
+input OrderCreateInput {
+  amount: Int!
+  tax: Float!
+  total: Int!
+}
+
+input OrderCancelInput {
+  orderId: String!
+}
+
+input OrderByIdInput {
+  orderId: String!
+}
+
+input CheckOrderStatusInput {
+  orderId: String!
+}

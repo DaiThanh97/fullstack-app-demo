@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+        - name: orders
+          image: setel/orders
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+          env:
+            - name: INTERNAL_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: internal-key
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: order-mongo-user
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: all-secret
+                  key: order-mongo-password
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: node-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: orders-port
+            - name: OPEN_PLAYGROUND
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: open-playground
+            - name: SERVICE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-service-name
+            - name: LOG_SERVICE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-service-name
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: log-level
+            - name: LOG_INLINE
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: log-inline
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-mongo-host
+            - name: MONGO_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-mongo-db
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-redis-host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: order-redis-port
+            - name: NATS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: all-config-map
+                  key: nats-host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-svc
+spec:
+  selector:
+    app: orders
+  ports:
+    - name: orders
+      protocol: TCP
+      port: 5001
+      targetPort: 5001

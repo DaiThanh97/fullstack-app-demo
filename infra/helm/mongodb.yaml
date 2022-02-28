@@ -1,0 +1,4 @@
+architecture: replicaset
+replicaCount: 3
+auth:
+  rootPassword: secret-root-pwd

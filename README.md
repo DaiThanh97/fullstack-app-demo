@@ -183,7 +183,7 @@ cd frontend && yarn start
 127.0.0.1 setel.dev
 ```
 
-**NOTE**: The app should be accessible at http://localhost:3000. The backend GraphQL can be accessed at http://setel.dev/data. If you want to run project individually, please change `.env.example` to `.env` to bootstrap correctly.
+**NOTE**: The app should be accessible at http://setel.dev. The backend GraphQL can be accessed at http://setel.dev/data. If you want to run project individually, please change `.env.example` to `.env` to bootstrap correctly.
 
 ## Other Notes
 

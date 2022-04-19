@@ -1,4 +1,4 @@
-# Technical Test - Readme
+# Technical Criteria - Readme
 
 ## System Design
 
